@@ -1,2 +1,1 @@
-# Sharded-Key-Value-Service
-### A sharded storage system must be able to shift shards among replica groups. One reason is that some groups may become more loaded than others, so that shards need to be moved to balance the load. Another reason is that replica groups may join and leave the system: new replica groups may be added to increase capacity, or existing replica groups may be taken offline for repair or retirement.
+"# Sharded-Key-Value-Service" 
