@@ -148,23 +148,6 @@ func (kv *ShardKV) Join(args *KVArgs, reply *interface{}) error {
 	return nil
 }
 
-func (kv *ShardKV) UpdateShard(args *KVArgs, reply *KVArgs) error {
-	kv.mu.Lock()
-	defer kv.mu.Unlock()
-	reply.Kv = make(map[string]Kvpair)
-	reply.Vv = make(map[string]Vvpair)
-	for k, vv := range kv.vv {
-		if args.Shard == key2shard(k) {
-			pid := kv.vPid[k]
-			val := kv.vKv[pid].Value
-			reply.Kv[pid] = Kvpair{k, val}
-			reply.Vv[k] = vv
-		}
-	}
-	kv.config.Shards[args.Shard] = args.Gid
-	return nil
-}
-
 //
 // Ask the shardmaster if there's a new configuration;
 // if so, re-configure.
